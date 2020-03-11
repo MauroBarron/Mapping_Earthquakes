@@ -6,8 +6,9 @@ console.log("Entering code section - working so far");
 let map = L.map('mapid').setView([40.7, -94.5], 4);
 
 // Create the tile layer that serves as background
-let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-attribution: 'Map data © <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
+//let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+attribution: 'Map data: © <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 	maxZoom: 18,
 	accessToken: API_KEY
 });
@@ -16,4 +17,19 @@ attribution: 'Map data © <a href="https://www.mapbox.com/about/maps/">Mapbox</a
 streets.addTo(map);
 
 //QA Check
-console.log("Was our map presented in the branch?");
+console.log("Was our map presented with the Streets tile?");
+
+// Add a marker to the map for Oakland
+//let marker = L.marker([37.8044, -122.2712]);
+//marker.addTo(map);
+
+// Add a circle to the map for LA 
+let circleM = L.circleMarker([34.0522, -118.2437], {
+	radius: 300,
+	color: 'black',
+    fillColor: '#ffffa1'    
+});
+circleM.addTo(map);
+
+// Post marker check
+console.log("Was the marker added to the map?");
