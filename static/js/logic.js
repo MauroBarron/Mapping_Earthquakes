@@ -36,7 +36,7 @@ console.log("Was our Toronto map presented with the Dark and Light options?");
 
 
 // Accessing the airport GeoJSON via GitHub URL
-let torontoHoods = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthquakes/Mapping_GeoJSON_Linestrings/static/data/torontoRoutes.json";
+let torontoHoods = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/static/data/torontoNeighborhoods.json";
 
 // Create a style for the lines.
 let geoStyle = {
@@ -45,7 +45,7 @@ let geoStyle = {
 }
 
 // Grabbing our GeoJSON data.
-d3.json(torontoData).then(function(data) {
+d3.json(torontoHoods).then(function(data) {
   console.log(data);
 
 // Creating a GeoJSON layer with the retrieved data.
