@@ -17,15 +17,15 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 
 // Create a base layer that holds both maps.
 let baseMaps = {
-  Streets: streets,
-  Satellite: satelliteStreets
+  "Streets": streets,
+  "Satellite Streets": satelliteStreets
 };
 
 // Create the map object with Toronto as center and zoom level.
 let map = L.map('mapid', {
   center:[43.7, -79.3],
-  zoom: 2,
-  layers: [satelliteStreets]
+  zoom: 11,
+  layers: [streets]
  });
 
 // Pass our map layers into our layers control and add the layers control to the map.
@@ -40,8 +40,8 @@ let torontoHoods = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthq
 
 // Create a style for the lines.
 let geoStyle = {
-	color: "#ffffa1",
-	weight: 2
+	color: "#3399FF",
+	weight: 1
 }
 
 // Grabbing our GeoJSON data.
@@ -53,8 +53,9 @@ d3.json(torontoHoods).then(function(data) {
     style: geoStyle,
     onEachFeature: function(feature, layer) {
       console.log(layer);
-      layer.bindPopup("<h2>" + "Airline: " + feature.properties.airline + "</h2>"
-      + "<hr>" + "<h3>" + "Destination:" + feature.properties.dst + "</h3>");
+      layer.bindPopup("<h2>" + "Neighborhood: " + feature.properties.AREA_NAME + "</h2>"
+      //+ "<hr>" + "<h3>" + "Destination:" + feature.properties.dst + "</h3>");
+      );
   }
   }).addTo(map);
 });
