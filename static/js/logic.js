@@ -2,14 +2,14 @@
 console.log("Entering code section - working so far");
 
 // Create the base dark layer
-let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data: © <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 	maxZoom: 18,
 	accessToken: API_KEY
 });
 
 // Create the optional light layer
-let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
   attribution: 'Map data: © <a href="https://www.mapbox.com/about/maps/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> <strong><a href="https://www.mapbox.com/map-feedback/" target="_blank">Improve this map</a></strong>',
 	maxZoom: 18,
 	accessToken: API_KEY
@@ -17,15 +17,15 @@ let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles
 
 // Create a base layer that holds both maps.
 let baseMaps = {
-  Dark: dark,
-  Light: light
+  Streets: streets,
+  Satellite: satelliteStreets
 };
 
 // Create the map object with Toronto as center and zoom level.
 let map = L.map('mapid', {
-  center:[44.0, -80.0],
+  center:[43.7, -79.3],
   zoom: 2,
-  layers: [dark]
+  layers: [satelliteStreets]
  });
 
 // Pass our map layers into our layers control and add the layers control to the map.
@@ -36,7 +36,7 @@ console.log("Was our Toronto map presented with the Dark and Light options?");
 
 
 // Accessing the airport GeoJSON via GitHub URL
-let torontoData = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthquakes/Mapping_GeoJSON_Linestrings/static/data/torontoRoutes.json";
+let torontoHoods = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthquakes/Mapping_GeoJSON_Linestrings/static/data/torontoRoutes.json";
 
 // Create a style for the lines.
 let geoStyle = {
