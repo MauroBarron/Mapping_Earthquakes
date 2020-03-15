@@ -140,6 +140,31 @@ function getColor(magnitude) {
 }
 
 
+//
+// Challenge: add tectonic plates and data to map
+//
+d3.json("https://github.com/fraxen/tectonicplates/blob/master/GeoJSON/PB2002_boundaries.json").then(function(data) {
+
+// Creating a GeoJSON tectonic plate layer with the retrieved data.
+L.geoJson(data, {
+  // We turn each feature into a circleMarker on the map.
+      pointToLayer: function(feature, latlng) {
+          console.log(data);
+          return L.circleMarker(latlng);
+          },
+      style: styleInfo,
+      //Create a popup for each circleMarker to display the magnitude and
+      //location of the earthquake after the marker has been created and styled.
+      onEachFeature: function(feature, layer) {
+        layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+      }
+    }).addTo(earthquakes);
+    // Add the earthquake layer to map
+    earthquakes.addTo(map);
+  });
+  
+
+
 
 // // Accessing the airport GeoJSON via GitHub URL
 // let torontoHoods = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/static/data/torontoNeighborhoods.json";
