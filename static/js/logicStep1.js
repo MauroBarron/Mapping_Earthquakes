@@ -18,13 +18,13 @@ let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/sate
 // Create a base layer that holds both maps.
 let baseMaps = {
   "Streets": streets,
-  "Satellite Streets": satelliteStreets
+  "Satellite": satelliteStreets
 };
 
-// Create the map object with Toronto as center and zoom level.
+// Create the map object with US  center and zoom level.
 let map = L.map('mapid', {
-  center:[43.7, -79.3],
-  zoom: 11,
+  center:[39.5, -98.5],
+  zoom: 3,
   layers: [streets]
  });
 
@@ -32,35 +32,42 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 //QA Check
-console.log("Was our Toronto map presented with the Dark and Light options?");
+console.log("Was the US map presented with the Street and Satellite options?");
 
 
-// Accessing the airport GeoJSON via GitHub URL
-let torontoHoods = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/static/data/torontoNeighborhoods.json";
-
-// Create a style for the lines.
-let geoStyle = {
-	color: "#3399FF",
-	weight: 1
-}
-
-// Grabbing our GeoJSON data.
-d3.json(torontoHoods).then(function(data) {
-  console.log(data);
-
-// Creating a GeoJSON layer with the retrieved data.
-  L.geoJson(data, {
-    style: geoStyle,
-    onEachFeature: function(feature, layer) {
-      console.log(layer);
-      layer.bindPopup("<h2>" + "Neighborhood: " + feature.properties.AREA_NAME + "</h2>"
-      //+ "<hr>" + "<h3>" + "Destination:" + feature.properties.dst + "</h3>");
-      );
-  }
-  }).addTo(map);
+// Retrieve the earthquake GeoJSON data.
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(data) {
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJson(data).addTo(map);
 });
-//QA Check
-console.log("Was our airport data map presented?");
+
+
+// // Accessing the airport GeoJSON via GitHub URL
+// let torontoHoods = "https://raw.githubusercontent.com/MauroBarron/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/static/data/torontoNeighborhoods.json";
+
+// // Create a style for the lines.
+// let geoStyle = {
+// 	color: "#3399FF",
+// 	weight: 1
+// }
+
+// // Grabbing our GeoJSON data.
+// d3.json(torontoHoods).then(function(data) {
+//   console.log(data);
+
+// // Creating a GeoJSON layer with the retrieved data.
+//   L.geoJson(data, {
+//     style: geoStyle,
+//     onEachFeature: function(feature, layer) {
+//       console.log(layer);
+//       layer.bindPopup("<h2>" + "Neighborhood: " + feature.properties.AREA_NAME + "</h2>"
+//       //+ "<hr>" + "<h3>" + "Destination:" + feature.properties.dst + "</h3>");
+//       );
+//   }
+//   }).addTo(map);
+// });
+// //QA Check
+// console.log("Was our airport data map presented?");
 
 //
 // Adding GeoJSONData from a GeoJSON data structure.
