@@ -5,11 +5,10 @@ Mapping Earthquakes with JS, D3, Leaflet and MapBox, using geoJSON data.
 
 1. Project Description.
 2. List of attachments.
-3. Website link
 
 ### 1 -Project Description.  
 
-Overall objective of this module is to create a web site,  , that displays a stylized global map showing earthquake activity for the past seven days. 
+Overall objective of this module is to create a web site that displays a stylized global map showing earthquake activity for the past seven days. 
 
 1. The app offers a control on the top right corner for selecting between three different Mapbox map styles; street, satellite and outdoors, as well as two different overlays; earthquakes and tectonic plates. 
 2. Each earthquake is displayed with a circle marker that is color coded by magnitude as shown in the legend on the bottom right corner.  The size of each circle marker is also proportional to the earthquake magnitude.
